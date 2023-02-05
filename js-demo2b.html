@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Second Web Page</title>
+  <link rel="stylesheet" href="demo.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <div id="container">
+    <header></header>
+    <nav></nav>
+    <main></main>
+    <p>Click button to load result.json file</p>
+    <input type = "button" id = "btn" value = "Load Data" />
+    <div id = "showinfo">
+
+    </div>
+    <footer></footer>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("header").html("My Web Site Brand");
+      $("nav").html(
+        "<ul><li><a href='js-demo2.html'>Home</a></li><li><a href='js-demo2b.html'>About</a></li><li><a href='js-demo2d.html'>Gallery</a></li><li><a href='js-demo2c.html'>Contact</a></li></ul>"
+      );
+      $("main").html(
+        "<h1>My Second Heading</h1><p>My Second paragraph.</p><table><caption>Activities at the cliffs</caption><thead><tr><th>Activity</th><th>West Cliff </th><th>North Cliff</th><th>East Cliff</th><th>South Cliff</th></tr></thead><tbody><tr><td>Hiking</td><td>college Hikes</td><td>Family Fun</td><td>Treasure Trafs</td><td>Canyon Explorer</td></tr><tr><td>Kayak</td><td>Western Kayak Meetup</td><td>Not Available</td><td>Youth Kayaking</td><td>Kayak Down</td></tr></tbody><tfoot><tr><td>Skydiving</td><td>Seacliff Diving</td><td>Sky is the limit</td><td>Not Available</td><td>Sky Diving For beginners</td></tr></tfoot></table>"
+      );
+
+        $("#btn").click(function(event){
+
+      //Add a div element within the body
+      $('body').append('<div id="showinfo"></div>');
+
+      //Add paragraph elements within the div
+      $('#showinfo').append('<p></p>');
+      $('#showinfo').append('<p></p>');
+      $('#showinfo').append('<p></p>');
+  
+      //Load data from json file to each paragraphs
+      $.getJSON('/jq/result.json', function(jqdata) {
+        $('#showinfo p:first-child').append('NAME: ' + jqdata.name);
+        $('#showinfo p:nth-child(2)').append('AGE: ' + jqdata.age);
+        $('#showinfo p:last-child').append('SEX: ' + jqdata.sex);
+      });
+
+  });
+
+
+      $("footer").html("&copy; Copyright 2020");
+    });
+  </script>
+</body>
+</html>
